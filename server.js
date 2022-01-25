@@ -8,6 +8,7 @@ var argv = require('minimist');
 // Define allowed argument name 'port'.
 
 // Define a const `port` using the argument from the command line. 
+const port = process.env.PORT || 3000;
 // Make this const default to port 3000 if there is no argument given for `--port`.
 
 // Use the fs module to create an arrow function using `fs.readFile`.
@@ -18,7 +19,17 @@ var argv = require('minimist');
 // If there is an error, put it on the console error, return, and exit with error code 1. 
 // Do not be nice about exiting.
 
-
+fs.readFile(
+  "/Users/cecilialee/Documents/academic/comp426/a01-ceciliallee/www/index.html",
+  "utf8",
+  (err, data) => {
+    if (err) {
+      console.error(err);
+      return;
+    }
+    console.log(data);
+  }
+);
 
 
 
@@ -29,14 +40,20 @@ var argv = require('minimist');
 // 2. set a header with content type `text/html`, and 
 // 3. end with the data that you are reading in from ./www/index.html.
 
-
+const server = http.createServer((req, res) => {
+  res.statusCode = 200;
+  res.setHeader("Content-Type", "text/html");
+  res.end("<h1>Hello, World!</h1>");
+});
 
 
 
 // Start the `server` const listening on the port defined by argument in your `port` const. 
 // Put the exact message `Server listening on port ${port}` on the console log. 
 
-
+server.listen(port, () => {
+  console.log(`Server running at port ${port}`);
+});
 
 
 // That's it! You're all done!

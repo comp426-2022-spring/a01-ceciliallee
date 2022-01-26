@@ -48,6 +48,4 @@ fs.readFile(
 // 2. set a header with content type `text/html`, and 
 // 3. end with the data that you are reading in from ./www/index.html.
 
-
-
 // That's it! You're all done!
